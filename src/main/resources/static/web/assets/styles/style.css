@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1{
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    background-size: cover;
+    transition: 0.3s;
+}
+main {
+    height: 100vh;
+    background-image: url(../imges/2312019.jpg);
+    background-repeat: no-repeat;
+}
+
+.nv {
+    background-color: #122958ea;
+   
+}
+
+footer {
+    background-color: #122958ea;
+    
+}
+
+.pp{
+    height: 26vh;
+    background-image: url(../imges/bitcoin-banner.jpg);
+    background-repeat: no-repeat;
+    z-index: 1;
+    background-size: cover;
+}
+  
+
+

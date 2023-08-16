@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Accounts</title>
+    <link rel="shortcut icon" href="./assets/imges/price_10094573.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="nv">
+            <nav class=" navbar navbar-expand-lg ms-3">
+                <div class="container-fluid">
+                    <button class="navbar-toggler ms-auto bg-warning" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+                        <ul class="navbar-nav gap-5">
+                            <li class="nav-item  bg-dark rounded-2 text-center mt-2">
+                                <a class="nav-link active  fw-bold text-white" aria-current="page" href="#">ACCOUNTS</a>
+                            </li>
+                            <li class="nav-item bg-dark rounded-2 text-center mt-2">
+                                <a class="nav-link fw-bold text-white" href="#">CARDS</a>
+                            </li>
+                            <li class="nav-item bg-dark rounded-2 text-center mt-2">
+                                <a class="nav-link  fw-bold text-white" href="#">LOANS</a>
+                            </li>
+                            <li class="nav-item bg-dark rounded-2 text-center mt-2">
+                                <a class="nav-link  fw-bold text-white" href="#">TRANSACTIONS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <h1 class=" pp display-1 fw-bolder text-center text-white">Welcome{{"   "+ client.firstName}}</h1>
+        </header>
+
+        <main class="flex-grow-1 p-2 d-flex flex-column gap-3 align-items-center flex-lg-row justify-content-lg-around "
+        id="app">
+            <div class="card p-2 bg-transparent border border-primary" style="width: 18rem; backdrop-filter: blur(15px);">
+                <img src="./assets/imges/7309670.jpg" class="card-img-top" alt="...">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-transparent fw-bold text-white" style="backdrop-filter: blur(15px);">Name:
+                        {{client.firstName}}</li>
+                    <li class="list-group-item bg-transparent text-white" style="backdrop-filter: blur(15px);">Lastname:
+                        {{client.lastName}}</li>
+                    <li class="list-group-item bg-transparent text-white" style="backdrop-filter: blur(15px);">E-mail:
+                        {{client.clientEmail}}
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="d-flex justify-content-around flex-column gap-3 align-items-center col-12 col-lg-7">
+                <template v-for="account of accounts">
+
+                    <div class="card col-12 bg-transparent text-lg-center col-lg-7"
+                        style="backdrop-filter: blur(15px);">
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item bg-transparent border border-primary text-white" style="backdrop-filter: blur(15px);">Account Number:
+                                {{account.number}}</li>
+
+                            <li class="list-group-item bg-transparent border border-primary text-white" style="backdrop-filter: blur(15px);">Balance:
+                                {{account.balance}}</li>
+
+                            <li class="list-group-item bg-transparent border border-primary text-white" style="backdrop-filter: blur(15px);">Creation
+                                Date:
+                                {{account.creationDate}}</li>
+                        </ul>
+
+                        <a v-bind:href="'./account.html?id='+account.id"
+                            class="d-flex justify-content-center text-decoration-none"><button type="button"
+                                class="css-button-gradient--2">Details</button>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </main>
+
+    </div>
+
+        <footer class="footer p-1 d-flex flex-column-reverse align-items-center flex-lg-row justify-content-lg-around text-lg-center"
+            id="foot">
+            <h6 class="p-1 m-lg-0 text-white"><i class=" bi bi-c-circle"  :style="{ color: 'green' }"></i> 2023: All rights reserved</h6>
+            <div class="ps-2 pe-2">
+                <a href="https://www.instagram.com/"><i class="bi bi-instagram fs-1"></i></a>
+                <a href="https://www.facebook.com/"><i class="bi bi-facebook fs-1"></i></a>
+                <a href="tel:34678567876"><i class="bi bi-whatsapp fs-1" :style="{ color: 'green' }"></i></i></a>
+            </div>
+         </footer>
+
+         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+         crossorigin="anonymous"></script>
+         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="./assets/scripts/accounts.js"></script>
+
+</body>
+
+</html>
