@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -27,9 +29,17 @@ public class Account {
     private Double balance;
 
 
+    //Relacion muchas a una con cliente
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="owner_id")
     private Client owner;
+
+
+    //Relacion una a muchas con transactions
+    @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
+    Set<Transaction> transactions = new HashSet<>();
+
+
 
     public Account() { }
 
@@ -57,15 +67,43 @@ public class Account {
         return number;
     }
 
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public Double getBalance() {
         return balance;
     }
 
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+
+
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transaction.setAccount(this);
+        transactions.add(transaction);
+    }
 }
 
+  /*  public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void addAccount(Account account) {
+        account.setOwner(this);
+        accounts.add(account);
+    }*/

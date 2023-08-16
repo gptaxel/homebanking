@@ -14,14 +14,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
-@RestController
+//@RestController
 
-@SpringBootApplication
+//@SpringBootApplication
 @Entity
-//
 public class Client {
 
     @Id
@@ -29,17 +29,24 @@ public class Client {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
-    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-    Set<Account> accounts = new HashSet<>();
 
     private String firstName;
     private String lastName;
     private String clientEmail;
 
-    //@javax.persistence.Id
+
+    //Relacion uno a muchas con cuentas
+    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+    private Set<Account> accounts = new HashSet<>();
 
 
 
+    //Relacion uno a muchas con Prestamos
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<ClientLoan> clientLoans=new HashSet<>();
+
+
+    //Hibernate
     public Client() {
     }
 
@@ -57,6 +64,9 @@ public class Client {
 
 
 
+    public Long getId() {
+        return id;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -81,17 +91,11 @@ public class Client {
         this.clientEmail = clientEmail;
     }
 
-    public String toString() {
+   /* public String toString() {
         return firstName + " " + lastName + " " + clientEmail;
-    }
+    }*/
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
 
     //------------
 
@@ -99,12 +103,34 @@ public class Client {
         return accounts;
     }
 
+    /*public Loan getLoan() {
+        return loan;
+    }*/
+
+    public Set<ClientLoan> getClientLoans() {
+        return clientLoans;
+    }
+
+    public void addClientLoan(ClientLoan clientLoan) {
+        clientLoan.setClient(this);
+        clientLoans.add(clientLoan);
+    }
+
     public void addAccount(Account account) {
         account.setOwner(this);
         accounts.add(account);
     }
 
-
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", accounts=" + accounts +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", clientEmail='" + clientEmail + '\'' +
+                '}';
+    }
 }
 
 

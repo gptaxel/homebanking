@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 
-<body class="d-flex flex-column ">
+<body>
     <div id="app">
         <header class="nv">
             <nav class=" navbar navbar-expand-lg ms-3">
@@ -40,82 +40,70 @@
                     </div>
                 </div>
             </nav>
-            <h1 class=" pp display-1 fw-bolder text-center text-white">Welcome{{"   "+ client.firstName}}</h1>
+            <h1 class=" pp display-1 fw-bolder text-center text-white">Welcome{{"   " +client.firstName}} </h1>
         </header>
 
-        <main class="flex-grow-1 p-2 d-flex flex-column gap-3 align-items-center flex-lg-row justify-content-lg-evenly "
-        id="app">
-            <div class="card p-2 col-lg-4 bg-transparent border border-primary" style="width: 18rem; backdrop-filter: blur(15px);">
+        <main class="flex-grow-1 p-2 d-flex flex-column gap-3 align-items-center flex-lg-row justify-content-lg-around"
+            id="app">
+            <div class="card cardS p-2 bg-transparent fw-bold border border-primary" style="width: 18rem; backdrop-filter: blur(15px);">
                 <img src="./assets/imges/7309670.jpg" class="card-img-top" alt="...">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-transparent fw-bold text-white" style="backdrop-filter: blur(15px);">Name:
                         {{client.firstName}}</li>
+
                     <li class="list-group-item bg-transparent text-white" style="backdrop-filter: blur(15px);">Lastname:
                         {{client.lastName}}</li>
+
                     <li class="list-group-item bg-transparent text-white" style="backdrop-filter: blur(15px);">E-mail:
                         {{client.clientEmail}}
                     </li>
                     
+                        <li class="list-group-item bg-transparent text-white" style="backdrop-filter: blur(15px);">Account:
+                            {{account.number}}
+                        </li>
+
+                    <li class="list-group-item bg-transparent fs-3" style="backdrop-filter: blur(15px);"><i
+                            class="bi bi-box-arrow-left"></i>
+                    </li>
                 </ul>
+
             </div>
-            <div class="d-flex justify-content-around flex-column gap-3 align-items-center col-12 col-lg-4">
-                <template v-for="account of accounts">
-
-                    <div class="card col-12 bg-transparent text-lg-center col-lg-7"
-                        style="backdrop-filter: blur(15px);">
-                        <ul class="list-group list-group-flush">
-
-                            <li class="list-group-item bg-transparent border border-primary text-white" style="backdrop-filter: blur(15px);">Account Number:
-                                {{account.number}}</li>
-
-                            <li class="list-group-item bg-transparent border border-primary text-white" style="backdrop-filter: blur(15px);">Balance:
-                                {{account.balance}}</li>
-
-                            <li class="list-group-item bg-transparent border border-primary text-white" style="backdrop-filter: blur(15px);">Creation
-                                Date:
-                                {{account.creationDate}}</li>
-                        </ul>
-
-                        <a v-bind:href="'./account.html?id='+account.id"
-                            class="d-flex justify-content-center text-decoration-none"><button type="button"
-                                class="css-button-gradient--2">Details</button>
-                        </a>
-                    </div>
-                </template>
-            </div>
-            <div class="d-flex justify-content-around w-10 flex-column gap-3 align-items-center col-4 col-lg-4" >
-                <table class="col-4">
-                    <thead class=" p-2 bg-transparent fw-bold border border-primary">
+            <div class="d-flex justify-content-around flex-column gap-3 align-items-center col-12 col-lg-7">
+                <table class="col-12">
+                    <thead class="p-2 bg-transparent fw-bold border border-primary text-white">
                         <tr>
-                            <th class="text-center" colspan="4">Loans</th>
+                            <th class="text-center" colspan="4">Transactions Resume</th>
                         </tr>
                         <tr>
-                            <td class="p-1 border border-primary text-white" style="backdrop-filter: blur(15px);">Name</td>
-                            <td class="p-1 border border-primary text-white" style="backdrop-filter: blur(15px);">Amount</td>
-                            <td class="p-1 border border-primary text-white" style="backdrop-filter: blur(15px);">Payments</td>
+                            <td class="p-1 border border-primary text-white">Type</td>
+                            <td class="p-1 border border-primary text-white">Amount</td>
+                            <td class="p-1 border border-primary text-white">Description</td>
+                            <td class="p-1 border border-primary text-white">Date</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <template v-for="loan of loans">
-                            <tr>
-                                <td class="p-1 border border-primary text-white">{{loan.name}}</td>
-                                <td class="p-1 border border-primary text-white">{{loan.amount.toLocaleString()}}</td>
-                                <td class="p-1 border border-primary text-white">{{loan.payments}}</td>
+                        <template v-for="transaction of transactions">
+
+                            <!-- :style="{ color: isActive ? 'green' : 'red' }" -->
+                            <tr :class="transaction.type=='CREDIT' ? 'p-1 text-success':'p-1 text-danger'">
+                                <td class="p-1 border border-primary fw-bold">{{transaction.type}}</td>
+                                <td class="p-1 border border-primary text-white">{{transaction.amount.toLocaleString()}}</td>
+                                <td class="p-1 border border-primary text-white">{{transaction.description}}</td>
+                                <td class="p-1 border border-primary text-white">{{transaction.date}}</td>
                             </tr>
                         </template>
                     </tbody>
                 </table>
             </div>
-           <!--  <template v-else>
-                <h2 class="text-center">NO HAY PPRESTAMOS DISPONIBLES</h2>
-              </template> v-if="loans.length > 0" -->
         </main>
 
     </div>
 
+    <!-- <tr :class="transaction.type=='CREDIT' ? 'p-1 text-success':'p-1 text-danger'"> -->
+
         <footer class="footer p-1 d-flex flex-column-reverse align-items-center flex-lg-row justify-content-lg-around text-lg-center"
             id="foot">
-            <h6 class="p-1 m-lg-0 text-white"><i class=" bi bi-c-circle"  :style="{ color: 'green' }"></i> 2023: All rights reserved</h6>
+            <h6 class="p-1 m-lg-0 text-white"><i class=" bi bi-c-circle"></i> 2023: All rights reserved</h6>
             <div class="ps-2 pe-2">
                 <a href="https://www.instagram.com/"><i class="bi bi-instagram fs-1"></i></a>
                 <a href="https://www.facebook.com/"><i class="bi bi-facebook fs-1"></i></a>
@@ -129,7 +117,7 @@
          crossorigin="anonymous"></script>
          <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-    <script src="./assets/scripts/accounts.js"></script>
+    <script src="./assets/scripts/account.js"></script>
 
 </body>
 

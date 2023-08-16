@@ -16,7 +16,7 @@ public class ClientDTO {
         //Set<Account> accounts = new HashSet<>();
 
         private Set<AccountDTO> accounts = new HashSet<>();
-
+        private Set<ClientLoanDTO> loans;
 
 
 
@@ -33,12 +33,8 @@ public class ClientDTO {
 
                 this.accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
 
-               /* Para usar las cuentas primero llamo las cuentas de client y las paso a stream(.stream) el cual es un objeto iterable
-                al cual se le pueden aplicar metedos tales como .map .filter, es parecido a un array de JS, una vez echo eso se hace un map
-                y le digo al map que tome cada cuenta y creee una AccountDTO y como sigue siendo un archivo stream y mi propiedad accaounts me pide
-                una collecion tipo Set uso el collects .toset() para que sea del tipo que me pide Account por que java es un lenguaje fuertemente tipado.*/
-
-
+                //ClientLoanDTO-----------------
+                this.loans=client.getClientLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
 
         }
 
@@ -90,10 +86,33 @@ public class ClientDTO {
                 return accounts;
         }
 
-        public void addAccount(AccountDTO account) {
+
+
+
+        public Set<ClientLoanDTO> getLoans() {
+                return loans;
+        }
+
+        //ESto no va en el DTO solo en la clase
+       /* public void addAccount(AccountDTO account) {
                 account.setOwner(this);
                 accounts.add(account);
-        }
+        }*/
 };
+
+
+
+
+
+
+
+
+
+//this.accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
+
+               /* Para usar las cuentas primero llamo las cuentas de client y las paso a stream(.stream) el cual es un objeto iterable
+                al cual se le pueden aplicar metedos tales como .map .filter, es parecido a un array de JS, una vez echo eso se hace un map
+                y le digo al map que tome cada cuenta y creee una AccountDTO y como sigue siendo un archivo stream y mi propiedad accaounts me pide
+                una collecion tipo Set uso el collects .toset() para que sea del tipo que me pide Account por que java es un lenguaje fuertemente tipado.*/
 
 
